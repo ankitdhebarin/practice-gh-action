@@ -1,0 +1,11 @@
+name: Workflow2
+on:
+    issues:
+      types: [opened, edited, milestoned]
+jobs:
+    issues:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Output context
+              run: echo "${{ toJson(github.event) }}"
+            
