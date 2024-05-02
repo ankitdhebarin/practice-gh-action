@@ -1,5 +1,5 @@
 name: Workflow2
-on: issues:
+on: issues
 jobs:
     issues:
         runs-on: ubuntu-latest
