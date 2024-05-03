@@ -33,6 +33,7 @@ jobs:
                 name: dist-artifact
                 path: dist
     Deploy:
+        needs: Build
         runs-on: ubuntu-latest
         steps:
             - name: Downloading artifacts
