@@ -13,7 +13,7 @@ jobs:
             - name: Install dependencies
               run: npm ci
             - name: Lint Code
-              run: npm run lint
+              run: npm run test
     Build:
         runs-on: ubuntu-latest
         steps:
@@ -26,17 +26,20 @@ jobs:
             - name: Install dependencies
               run: npm ci
             - name: Install dependencies
-              run: npm test
+              run: npm run build
+            - name: Upload Artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                name: dist-artifact
+                path: dist
     Deploy:
         runs-on: ubuntu-latest
         steps:
-            - name: Download Code
-              uses: actions/checkout@v4
-            - name: Install NodeJS
-              uses: actions/setup-node@v4
+            - name: Downloading artifacts
+              uses: actions/download-artifact@v4
               with:
-                node-version: 18
-            - name: Install dependencies
-              run: npm ci
+                name: dist-artifact
+            - name: Output Artifacts
+              run: ls
             - name: Deploy changes
-              run: npm run build
+              run: echo "Deploying..."
